@@ -617,7 +617,7 @@ while True:
 
 						response = os.system("ping -c 1 " + hostname)
 
-						if response == 0:
+						if 0 == 0: # response == 0:
 
 							friendly_name, camera_type = camera_details.split(',')
 							input_codec_string = "----input-codec=" + camera_type
@@ -637,11 +637,11 @@ while True:
 									logger.info("Camera %s is still down", camera)
 									rtsp_streams[friendly_name] = None
 							except:
-								logger.info("Camera %s is still down", camera)
+								logger.info("Camera %s is still down (no image)", camera)
 								rtsp_streams[friendly_name] = None
 							
 						else:
-							logger.info("Camera %s is still down", camera)
+							logger.info("Camera %s is still down (no ping)", camera)
 							rtsp_streams[friendly_name] = None
 
 						break
@@ -676,7 +676,7 @@ while True:
 				if movement:
 
 					detections = net.Detect(image_ai[camera], 
-								image_ai[camera].width, image_ai[camera].height, 'box,labels,conf')	
+								image_ai[camera].width, image_ai[camera].height, 'labels')	
 						
 					best_unfiltered_detection =	GetBestDetection(camera, detections, image_ai[camera].size)
 					
